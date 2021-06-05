@@ -38,8 +38,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1 onClick={callAPI}>Hello {message}</h1>
-      <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+      <h1 onClick={callAPI}>Gym Log {message}</h1>
+      <div class="w3-container  w3-amber w3-padding-16">
+        <h4>Select Date</h4>
+        <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+      </div>
       <ExerciseList exerciseList={exerciseList} />
       <ExerciseForm addExercise={addExercise} />
     </div>
