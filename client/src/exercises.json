@@ -1,0 +1,18 @@
+[{
+    "name": "Bench Press",
+    "sets": 3,
+    "reps": 12,
+    "startWeight": 185
+},
+{
+    "name":"Shoulder Press",
+    "sets": 4,
+    "reps": 5,
+    "startWeight": 45
+},
+{
+    "name": "Lateral Raise",
+    "sets": 4,
+    "reps": 12,
+    "startWeight": 20
+}]
