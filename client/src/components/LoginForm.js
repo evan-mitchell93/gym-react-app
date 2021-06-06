@@ -19,7 +19,7 @@ const LoginForm = () => {
             },
             body: JSON.stringify({msg: "login"})
         }).then((result) => {
-            console.log(result)
+            window.location.href = "http://localhost:3000/Home"
         }).catch((err) => {
             console.log(err);
         })

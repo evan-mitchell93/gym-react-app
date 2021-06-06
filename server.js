@@ -49,7 +49,7 @@ app.post('/login', async (req, res) => {
 
         if(userFound !== null && creds[1] == userFound.password){
             req.session.userName = creds[0];
-            return res.status(200).send({msg: "success"});
+            return res.status(200).send({msg: "Success"})
         }
         else{
             return res.status(403).send({msg: "wrong  username"})
