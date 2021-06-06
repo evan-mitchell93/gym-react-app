@@ -7,23 +7,26 @@ const LoginForm = () => {
 
     const submitHandler = (e) =>{
         e.preventDefault();
-        fetch("/login",{
+        let authString = `${uName}:${uPassword}`
+        fetch("/login/", {
             method: 'POST',
+            withCredentials: true,
+            credentials: 'include',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Basic ${authString} `,
             },
-            body: JSON.stringify({userName: uName, password: uPassword})
-        }).then((result) =>{
+            body: JSON.stringify({msg: "login"})
+        }).then((result) => {
             console.log(result)
-        }).catch((err) =>{
+        }).catch((err) => {
             console.log(err);
         })
-
     }
 
     const createUser = () => {
-        fetch("/register", {
+        fetch("/register",{
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -46,13 +49,13 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={submitHandler}>
-            <input name="uName" type="text" onChange={updateName} />
+        <form onSubmit={submitHandler} class="w3-container w3-center" style={{width: "50%", margin:"auto"}}>
+            <input name="uName" type="text" class="w3-input" onChange={updateName} />
             <label>User Name</label>
-            <input name="uPassword" type="password" onChange={updatePassword} />
+            <input name="uPassword" type="password" class="w3-input" onChange={updatePassword} />
             <label>Password</label>
-            <button class="w3-btn w3-teal">Login</button>
-            <button class="w3-btn w3-red" onClick={createUser}>Register</button>
+            <button class="w3-btn w3-teal w3-input">Login</button>
+            <button class="w3-btn w3-red w3-input" onClick={createUser}>Register</button>
         </form>
     );
 };

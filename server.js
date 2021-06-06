@@ -17,6 +17,17 @@ const User = require("./model/User");
 //json
 app.use(express.json());
 
+
+const util = require('util');
+const cors = require('cors');
+const session = require('express-session');
+
+app.use(session({secret: 'shhhhh'}))
+
+app.use(cors({
+    credentials: true
+}))
+
 app.listen(port, () => console.log(`listening on port ${port}`));
 
 app.get('/express_backend', (req, res) => {
@@ -26,8 +37,24 @@ app.get('/express_backend', (req, res) => {
 
 app.post('/login', async (req, res) => {
 
-    const found = await User.findOne({userName: req.body.userName});
-    console.log(found);
+    let auth = req.headers["authorization"];
+
+    if(!auth){
+        return res.status(401).send({error: "auth required"});
+    }
+    else{
+
+        var creds = auth.substring("Basic".length).trim().split(":");
+        const userFound = await User.findOne({userName: creds[0]});
+
+        if(userFound !== null && creds[1] == userFound.password){
+            req.session.userName = creds[0];
+            return res.status(200).send({msg: "success"});
+        }
+        else{
+            return res.status(403).send({msg: "wrong  username"})
+        }
+    }
 });
 
 app.post('/register', async (req, res) =>{
