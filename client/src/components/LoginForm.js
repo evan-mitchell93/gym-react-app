@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 
+
 const LoginForm = () => {
 
     const [uName, setUname] = useState("");
@@ -19,13 +20,16 @@ const LoginForm = () => {
             },
             body: JSON.stringify({msg: "login"})
         }).then((result) => {
+            return result.json();
+        }).then((json) => {
             window.location.href = "http://localhost:3000/Home"
         }).catch((err) => {
             console.log(err);
-        })
+        });
     }
 
-    const createUser = () => {
+    const createUser = (e) => {
+        e.preventDefault();
         fetch("/register",{
             method: 'POST',
             headers: {

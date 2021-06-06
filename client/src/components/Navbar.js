@@ -1,5 +1,7 @@
 import React from 'react';
 
+import LoginForm from "./LoginForm";
+
 import {BrowserRouter as Router,
         Switch,
         Route,
@@ -9,21 +11,24 @@ import {BrowserRouter as Router,
 
 import Home from "./Home";
 
-const Navbar = () =>{
+const Navbar = ({token, setToken}) =>{
 
     return(
-        <Router>
-            <div class="w3-bar w3-amber w3-left-align">
-                <Link to="/"><button class="w3-btn w3-amber">Blank</button></Link>
-                <Link to="/Home"><button class="w3-btn w3-amber">Home</button></Link>
-            </div>
-            <Switch>
-                <Route path="/Home">
-                    <Home />
-                </Route>
-            </Switch>
-        </Router>
-        
+        <div>
+            <Router>
+                <div class="w3-bar w3-amber w3-left-align">
+                    <Link to="/"><button class="w3-btn w3-amber">Blank</button></Link>
+                    <Link to="/Home"><button class="w3-btn w3-amber">Home</button></Link>
+                </div>
+                <Switch>
+                    <Route path="/Home">
+                        <Home token={token}  />
+                    </Route>
+                </Switch>
+            </Router>
+
+            <LoginForm setToken={setToken} />
+        </div>
     )
 }
 

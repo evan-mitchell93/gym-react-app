@@ -22,11 +22,17 @@ const util = require('util');
 const cors = require('cors');
 const session = require('express-session');
 
-app.use(session({secret: 'shhhhh'}))
+app.use(session({
+    secret: 'shhhhh',
+    resave: true,
+    saveUninitialized: true}))
 
 app.use(cors({
     credentials: true
 }))
+
+const cookieParser = require('cookie-parser');
+
 
 app.listen(port, () => console.log(`listening on port ${port}`));
 
@@ -48,8 +54,7 @@ app.post('/login', async (req, res) => {
         const userFound = await User.findOne({userName: creds[0]});
 
         if(userFound !== null && creds[1] == userFound.password){
-            req.session.userName = creds[0];
-            return res.status(200).send({msg: "Success"})
+            return res.status(200).send({msg: "Success", token: "test123"})
         }
         else{
             return res.status(403).send({msg: "wrong  username"})

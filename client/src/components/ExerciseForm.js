@@ -34,9 +34,8 @@ const ExerciseForm = ({addExercise}) =>{
                 <label for="reps">Reps</label>
                 <input class="w3-input" value={userInput[0].startWeight} name="startWeight" onChange={changeHandler} type="number" />
                 <label for="startWeight">Staring Weight</label>
-                <div>
-                    <button class="w3-btn">Add Exercise</button>
-                </div>
+                <button class="w3-btn w3-teal w3-input w3-section">Add Exercise</button>
+                
             </form>
         </div>
     );

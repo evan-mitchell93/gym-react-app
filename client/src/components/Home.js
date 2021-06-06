@@ -16,8 +16,10 @@ const Home = () => {
     setExerciseList(copy);
   }
 
+
   //state for storing the list of exercises for the date
   const [exerciseList, setExerciseList] = useState(data);
+
     return (
         <div>
             <div class="w3-container  w3-amber w3-padding-16">
