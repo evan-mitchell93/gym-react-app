@@ -54,7 +54,7 @@ app.post('/login', async (req, res) => {
         const userFound = await User.findOne({userName: creds[0]});
 
         if(userFound !== null && creds[1] == userFound.password){
-            return res.status(200).send({msg: "Success", token: "test123"})
+            return res.status(200).send({msg: "Success"})
         }
         else{
             return res.status(403).send({msg: "wrong  username"})

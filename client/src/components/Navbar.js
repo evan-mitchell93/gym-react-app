@@ -11,7 +11,7 @@ import {BrowserRouter as Router,
 
 import Home from "./Home";
 
-const Navbar = ({token, setToken}) =>{
+const Navbar = () =>{
 
     return(
         <div>
@@ -22,12 +22,12 @@ const Navbar = ({token, setToken}) =>{
                 </div>
                 <Switch>
                     <Route path="/Home">
-                        <Home token={token}  />
+                        <Home />
                     </Route>
                 </Switch>
             </Router>
 
-            <LoginForm setToken={setToken} />
+            <LoginForm />
         </div>
     )
 }
