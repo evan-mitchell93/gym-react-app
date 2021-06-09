@@ -12,6 +12,11 @@ mongoose.connect("mongodb+srv://pyuser:Son22arc2@hpgamecraft.xjnnt.mongodb.net/G
 () => console.log("connected to db"));
 
 
+//auth functions
+
+ const auths = require('./auth');
+
+
 const User = require("./model/User");
 
 //json
@@ -54,6 +59,7 @@ app.post('/login', async (req, res) => {
         const userFound = await User.findOne({userName: creds[0]});
 
         if(userFound !== null && creds[1] == userFound.password){
+            auths.generateAccessToken(creds[0]);
             return res.status(200).send({msg: "Success"})
         }
         else{
