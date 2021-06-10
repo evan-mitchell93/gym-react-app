@@ -4,6 +4,7 @@ import LoginForm from "./LoginForm";
 
 import AuthContext from '../contexts/AuthContext';
 
+
 import {BrowserRouter as Router,
         Switch,
         Route,
@@ -21,6 +22,7 @@ const Navbar = () =>{
     const toggleAuth = () => {
         setAuth(!auth.isAuth);
     }
+
     return(
         <div>
             <AuthContext.Provider value={{auth, toggleAuth}} >

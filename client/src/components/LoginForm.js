@@ -1,12 +1,19 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import AuthContext from '../contexts/AuthContext';
 import {Redirect} from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const LoginForm = () => {
 
     const [uName, setUname] = useState("");
     const [uPassword, setPassword] = useState("");
     const {auth, toggleAuth} = useContext(AuthContext);
+
+    useEffect (() => {
+        if(Cookies.get('jwt')){
+            toggleAuth();
+        }
+    });
 
     const submitHandler = (e) =>{
         e.preventDefault();
@@ -25,7 +32,6 @@ const LoginForm = () => {
             const token = result.json();
             document.cookie = `token=${token}`;
             toggleAuth();
-            console.log(auth);
 
         }).catch((err) => {
             console.log(err);

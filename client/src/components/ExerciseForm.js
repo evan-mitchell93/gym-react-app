@@ -22,7 +22,7 @@ const ExerciseForm = ({addExercise}) =>{
 
     return(
         <div>
-            <div class="w3-container w3-amber">
+            <div className="w3-container w3-amber">
                 <h2>Add Exercise</h2>
             </div>
             <form onSubmit={submitHandler} className="w3-container w3-left-align w3-padding-16 w3-border-red">
