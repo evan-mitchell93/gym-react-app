@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
-
+import React, {useState, useContext} from 'react';
+import AuthContext from '../contexts/AuthContext';
 
 const LoginForm = () => {
 
     const [uName, setUname] = useState("");
     const [uPassword, setPassword] = useState("");
+    const {auth, toggleAuth} = useContext(AuthContext);
 
     const submitHandler = (e) =>{
         e.preventDefault();
@@ -20,9 +21,11 @@ const LoginForm = () => {
             },
             body: JSON.stringify({msg: "login"})
         }).then((result) => {
-            return result.json();
-        }).then((json) => {
-            window.location.href = "http://localhost:3000/Home"
+            const token = result.json();
+            document.cookie = `token=${token}`;
+            toggleAuth();
+            console.log(auth);
+
         }).catch((err) => {
             console.log(err);
         });
@@ -53,13 +56,13 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={submitHandler} class="w3-container w3-center" style={{width: "50%", margin:"auto"}}>
-            <input name="uName" type="text" class="w3-input" onChange={updateName} />
+        <form onSubmit={submitHandler} className="w3-container w3-center" style={{width: "50%", margin:"auto"}}>
+            <input name="uName" type="text" className="w3-input" onChange={updateName} />
             <label>User Name</label>
-            <input name="uPassword" type="password" class="w3-input" onChange={updatePassword} />
+            <input name="uPassword" type="password" className="w3-input" onChange={updatePassword} />
             <label>Password</label>
-            <button class="w3-btn w3-teal w3-input">Login</button>
-            <button class="w3-btn w3-red w3-input" onClick={createUser}>Register</button>
+            <button className="w3-btn w3-teal w3-input">Login</button>
+            <button className="w3-btn w3-red w3-input" onClick={createUser}>Register</button>
         </form>
     );
 };

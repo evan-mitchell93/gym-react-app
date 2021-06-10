@@ -22,7 +22,7 @@ const Home = () => {
 
     return (
         <div>
-            <div class="w3-container  w3-amber w3-padding-16">
+            <div className="w3-container  w3-amber w3-padding-16">
                 <h4>Select Date</h4>
                 <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
             </div>

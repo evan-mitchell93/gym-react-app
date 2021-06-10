@@ -25,16 +25,16 @@ const ExerciseForm = ({addExercise}) =>{
             <div class="w3-container w3-amber">
                 <h2>Add Exercise</h2>
             </div>
-            <form onSubmit={submitHandler} class="w3-container w3-left-align w3-padding-16 w3-border-red">
-                <input class="w3-input" value={userInput[0].name} name="name" type="text" onChange={changeHandler} placeholder="Enter Exercise Name" />
-                <label class="w3-left-align">Exercise</label>
-                <input class="w3-input" value={userInput[0].sets} name="sets" type="number" onChange={changeHandler} />
-                <label for="sets">Sets</label>
-                <input class="w3-input" value={userInput[0].reps} name="reps" type="number" onChange={changeHandler} />
-                <label for="reps">Reps</label>
-                <input class="w3-input" value={userInput[0].startWeight} name="startWeight" onChange={changeHandler} type="number" />
-                <label for="startWeight">Staring Weight</label>
-                <button class="w3-btn w3-teal w3-input w3-section">Add Exercise</button>
+            <form onSubmit={submitHandler} className="w3-container w3-left-align w3-padding-16 w3-border-red">
+                <input className="w3-input" value={userInput[0].name} name="name" type="text" onChange={changeHandler} placeholder="Enter Exercise Name" />
+                <label className="w3-left-align">Exercise</label>
+                <input className="w3-input" value={userInput[0].sets} name="sets" type="number" onChange={changeHandler} />
+                <label>Sets</label>
+                <input className="w3-input" value={userInput[0].reps} name="reps" type="number" onChange={changeHandler} />
+                <label>Reps</label>
+                <input className="w3-input" value={userInput[0].startWeight} name="startWeight" onChange={changeHandler} type="number" />
+                <label>Staring Weight</label>
+                <button className="w3-btn w3-teal w3-input w3-section">Add Exercise</button>
                 
             </form>
         </div>

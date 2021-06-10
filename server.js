@@ -59,8 +59,8 @@ app.post('/login', async (req, res) => {
         const userFound = await User.findOne({userName: creds[0]});
 
         if(userFound !== null && creds[1] == userFound.password){
-            auths.generateAccessToken(creds[0]);
-            return res.status(200).send({msg: "Success"})
+            const token = auths.generateAccessToken(creds[0]);
+            return res.cookie('jwt', token).status(200).send({msg: "Success"})
         }
         else{
             return res.status(403).send({msg: "wrong  username"})
