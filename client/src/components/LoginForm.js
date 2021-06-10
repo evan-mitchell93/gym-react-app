@@ -1,5 +1,6 @@
 import React, {useState, useContext} from 'react';
 import AuthContext from '../contexts/AuthContext';
+import {Redirect} from 'react-router-dom';
 
 const LoginForm = () => {
 
@@ -55,16 +56,22 @@ const LoginForm = () => {
         setPassword(e.target.value);
     }
 
+    if(auth === true){
+        return <Redirect push to={{pathname: '/Home'}}></Redirect>
+    }
+    else{
+
     return (
-        <form onSubmit={submitHandler} className="w3-container w3-center" style={{width: "50%", margin:"auto"}}>
-            <input name="uName" type="text" className="w3-input" onChange={updateName} />
-            <label>User Name</label>
-            <input name="uPassword" type="password" className="w3-input" onChange={updatePassword} />
-            <label>Password</label>
-            <button className="w3-btn w3-teal w3-input">Login</button>
-            <button className="w3-btn w3-red w3-input" onClick={createUser}>Register</button>
-        </form>
-    );
+            <form onSubmit={submitHandler} className="w3-container w3-center" style={{width: "50%", margin:"auto"}}>
+                <input name="uName" type="text" className="w3-input" onChange={updateName} />
+                <label>User Name</label>
+                <input name="uPassword" type="password" className="w3-input" onChange={updatePassword} />
+                <label>Password</label>
+                <button className="w3-btn w3-teal w3-input">Login</button>
+                <button className="w3-btn w3-red w3-input" onClick={createUser}>Register</button>
+            </form>
+        );
+    }
 };
 
 export default LoginForm;

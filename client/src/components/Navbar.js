@@ -26,9 +26,8 @@ const Navbar = () =>{
             <AuthContext.Provider value={{auth, toggleAuth}} >
             <Router>
                 <div className="w3-bar w3-amber w3-left-align">
-                    <Link to="/"><button className="w3-btn w3-amber">Blank</button></Link>
                     <Link to="/Home"><button className="w3-btn w3-amber">Home</button></Link>
-                    <Link to="/Login"><button ClassName="w3-btn w3-amber">Login</button></Link>
+                    <Link to="/Login"><button className="w3-btn w3-amber">Login</button></Link>
                 </div>
                 <Switch>
                     <PrivateRoute component={Home} path="/Home"/>
