@@ -17,7 +17,9 @@ mongoose.connect("mongodb+srv://pyuser:Son22arc2@hpgamecraft.xjnnt.mongodb.net/G
  const auths = require('./auth');
 
 
+//db schemas
 const User = require("./model/User");
+const Exercise = require("./model/ExerciseModel");
 
 //json
 app.use(express.json());
@@ -36,6 +38,7 @@ app.use(cors({
     credentials: true
 }))
 
+
 const cookieParser = require('cookie-parser');
 
 
@@ -45,7 +48,15 @@ app.get('/express_backend', (req, res) => {
     res.send({express: 'your backend is connected'});
 });
 
+//get exercise
+app.post('/exercise', async (req, res) =>{
+    const userDate = new Date(req.body.date);
+    console.log(userDate);
+    const foundExercise = await Exercise.find({date: userDate});
+    res.send(foundExercise);
+})
 
+//login attempt
 app.post('/login', async (req, res) => {
 
     let auth = req.headers["authorization"];
@@ -68,6 +79,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
+//register attempt
 app.post('/register', async (req, res) =>{
 
     let auth = req.headers["authorization"];

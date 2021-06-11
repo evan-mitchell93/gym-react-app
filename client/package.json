@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^12.1.10",
     "hookrouter": "^1.2.5",
     "js-cookie": "^2.2.1",
+    "moment": "^2.29.1",
+    "rc-datepicker": "^5.0.16",
     "react": "^17.0.2",
     "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
