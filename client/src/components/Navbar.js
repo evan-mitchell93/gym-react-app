@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 
 import LoginForm from "./LoginForm";
 
+import RegisterForm from "./RegisterForm";
+
 import AuthContext from '../contexts/AuthContext';
 
 
@@ -35,6 +37,9 @@ const Navbar = () =>{
                     <PrivateRoute component={Home} path="/Home"/>
                     <Route path="/Login">
                         <LoginForm />
+                    </Route>
+                    <Route path="/Register">
+                        <RegisterForm />
                     </Route>
                 </Switch>
             </Router>

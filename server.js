@@ -69,16 +69,38 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/register', async (req, res) =>{
-    const newuser = new User({
-        userName: req.body.userName,
-        password: req.body.password
-    });
 
-    try{
-        const savedUser = await newuser.save();
-        res.json({error: null, msg: "successful"});
+    let auth = req.headers["authorization"];
+
+    if(!auth) {
+        return res.status(401).send({error: "auth required"});
     }
-    catch (error) {
-        res.status(400).json({error});
+
+    else{
+        var creds = auth.substring("Basic".length).trim().split(":");
+
+        const newuser = new User({
+            userName: creds[0],
+            password: creds[1]
+            
+        });
+
+        try{
+            const existingUser = await User.findOne({userName: newuser.userName});
+            if(existingUser){
+               return res.status(409).json({error: "username taken"});
+            }
+        }
+        catch (error) {
+            return res.status(400).json({error});
+        }
+    
+        try{
+            const savedUser = await newuser.save();
+             return res.json({error: null, msg: "successful"});
+        }
+        catch (error) {
+            return res.status(400).json({error});
+        }
     }
 })

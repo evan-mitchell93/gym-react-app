@@ -38,21 +38,7 @@ const LoginForm = () => {
         });
     }
 
-    const createUser = (e) => {
-        e.preventDefault();
-        fetch("/register",{
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({userName: uName, password: uPassword})
-        }).then((result) => {
-            console.log(result)
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
+
 
     const updateName = (e) =>{
         setUname(e.target.value);
@@ -62,20 +48,24 @@ const LoginForm = () => {
         setPassword(e.target.value);
     }
 
+
     if(auth === true){
         return <Redirect push to={{pathname: '/Home'}}></Redirect>
     }
     else{
 
     return (
+        <div>
             <form onSubmit={submitHandler} className="w3-container w3-center" style={{width: "50%", margin:"auto"}}>
-                <input name="uName" type="text" className="w3-input" onChange={updateName} />
+                <input name="uName" type="text" className="w3-input" onChange={updateName} placeholder="enter username" />
                 <label>User Name</label>
-                <input name="uPassword" type="password" className="w3-input" onChange={updatePassword} />
+                <input name="uPassword" type="password" className="w3-input" onChange={updatePassword} placeholder="enter password" />
                 <label>Password</label>
-                <button className="w3-btn w3-teal w3-input">Login</button>
-                <button className="w3-btn w3-red w3-input" onClick={createUser}>Register</button>
+                <button type="submit" className="w3-btn w3-teal w3-input">Login</button>
+                
             </form>
+            <a href="/Register">Register</a>
+            </div>
         );
     }
 };
