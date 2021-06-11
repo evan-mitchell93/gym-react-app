@@ -7,7 +7,8 @@ const port = process.env.PORT || 4999;
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://pyuser:Son22arc2@hpgamecraft.xjnnt.mongodb.net/Gym?retryWrites=true&w=majority",{
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 },
 () => console.log("connected to db"));
 
@@ -49,12 +50,58 @@ app.get('/express_backend', (req, res) => {
 });
 
 //get exercise
-app.post('/exercise', async (req, res) =>{
-    const userDate = new Date(req.body.date);
-    console.log(userDate);
-    const foundExercise = await Exercise.find({date: userDate});
-    res.send(foundExercise);
-})
+app.get('/exercise', async (req, res) =>{
+    //set date and hours for consistency
+    const userDate = new Date(req.query.date);
+    userDate.setHours(0,0,0);
+
+    Exercise.find({date: userDate}, (err, Exercises) =>{
+
+        //no entry for date create Exercise doc
+        if(!Exercises.length) {
+            emptyResponse = [new Exercise({
+                date: userDate,
+                exercises: [{"exercise": "", "sets": 0, "reps": 0, "weight": 0}]
+            })];
+            res.json(emptyResponse);
+        }
+        else{
+            res.json(Exercises);
+        }
+    });
+});
+
+app.post('/exercise/', async (req,res) => {
+
+    //set date and hours for consistency
+    const userDate = new Date(req.query.date);
+    userDate.setHours(0,0,0);
+
+    //check if there is a doc associated with the given date
+    const foundDate = await Exercise.findOne({date: userDate});
+
+    //if no doc exists, create new Exercise save it to db
+    if(!foundDate){
+
+        const saveDate = new Exercise({
+            date: userDate,
+            exercises: req.body.exerciseList
+        });
+        const saved = await saveDate.save();
+    }
+    else{
+        Exercise.updateOne({date: userDate},
+            {$set: {exercises: req.body.exerciseList.exercises}}, (err, docs) => {
+                if(err){
+                    res.status(409).send(err);
+                }
+                else{
+                }
+            });
+    }
+
+    res.send({msg: 'OK'})
+});
 
 //login attempt
 app.post('/login', async (req, res) => {

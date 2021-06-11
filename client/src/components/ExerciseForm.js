@@ -2,13 +2,13 @@ import React, {useState} from "react";
 
 const ExerciseForm = ({addExercise}) =>{
 
-    const [userInput, setInput] = useState([{"name":"", "sets":0, "reps": 0, "startWeight":0 }]);
+    const [userInput, setInput] = useState([{"exercise":"", "sets":0, "reps": 0, "weight":0 }]);
 
     const submitHandler = (e) =>{
         e.preventDefault();
-        if(userInput[0].name !== ""){
+        if(userInput[0].exercise !== ""){
             addExercise(userInput);
-            setInput([{"name":"", "sets":0, "reps": 0, "startWeight":0 }]);
+            setInput([{"exercise":"", "sets":0, "reps": 0, "weight":0 }]);
         }
     };
 
@@ -26,13 +26,13 @@ const ExerciseForm = ({addExercise}) =>{
                 <h2>Add Exercise</h2>
             </div>
             <form onSubmit={submitHandler} className="w3-container w3-left-align w3-padding-16 w3-border-red">
-                <input className="w3-input" value={userInput[0].name} name="name" type="text" onChange={changeHandler} placeholder="Enter Exercise Name" />
+                <input className="w3-input" value={userInput[0].exercise} name="exercise" type="text" onChange={changeHandler} placeholder="Enter Exercise Name" />
                 <label className="w3-left-align">Exercise</label>
                 <input className="w3-input" value={userInput[0].sets} name="sets" type="number" onChange={changeHandler} />
                 <label>Sets</label>
                 <input className="w3-input" value={userInput[0].reps} name="reps" type="number" onChange={changeHandler} />
                 <label>Reps</label>
-                <input className="w3-input" value={userInput[0].startWeight} name="startWeight" onChange={changeHandler} type="number" />
+                <input className="w3-input" value={userInput[0].weight} name="weight" onChange={changeHandler} type="number" />
                 <label>Staring Weight</label>
                 <button className="w3-btn w3-teal w3-input w3-section">Add Exercise</button>
                 

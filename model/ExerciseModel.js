@@ -6,27 +6,8 @@ const ExerciseSchema = new mongoose.Schema({
         required: true
     },
     
-    exercise: {
-        type: String,
-        required: true,
-        min: 6,
-        max: 255
-    },
+    exercises: [{exercise: String, sets: Number, reps: Number, weight: Number}]
 
-    sets: {
-        type: Number,
-        required: true
-    },
-
-    reps: {
-        type: Number,
-        required: true
-    },
-
-    weight: {
-        type: Number,
-        required: true
-    }
 });
 
 module.exports = mongoose.model("Exercise", ExerciseSchema);
