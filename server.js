@@ -95,11 +95,12 @@ app.post('/exercise/', async (req,res) => {
     }
     else{
         Exercise.updateOne({date: userDate},
-            {$set: {exercises: req.body.exerciseList.exercises}}, (err, docs) => {
+            {$set: {exercises: req.body.exerciseList}}, (err, docs) => {
                 if(err){
                     res.status(409).send(err);
                 }
                 else{
+                    res.status(200);
                 }
             });
     }

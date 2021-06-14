@@ -15,10 +15,10 @@ const Home = () => {
   //add a new exercise to the list
   const addExercise = (input) =>{
     let copy = [...renderCopy];
+    //append the new exercise data to current list of exercises
     copy = [...copy, {exercise:input[0].exercise, sets:input[0].sets, reps:input[0].reps, weight:input[0].weight}];
     setRenderCopy(copy);
     setExerciseList(copy)
-
   }
 
   useEffect (()=>{
@@ -30,7 +30,6 @@ const Home = () => {
       },
       body: JSON.stringify({exerciseList})
     }).then((resut) =>{
-      console.log("we did it");
     }).catch((err) =>{
       console.log(err);
     })
@@ -50,7 +49,7 @@ const Home = () => {
       return result.json()
 
     }).then((list) =>{
-      console.log(list)
+      //set copy of exercises
       setRenderCopy(list[0].exercises);
 
     }).catch((err) =>{
@@ -58,6 +57,7 @@ const Home = () => {
     });
   }
 
+  //udapte the chosen date
   const changeDate = (e) =>{
     e.preventDefault();
     setStartDate(e.target.value);
