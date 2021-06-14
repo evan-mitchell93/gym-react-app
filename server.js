@@ -3,9 +3,13 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 4999;
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 //database set up
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://pyuser:Son22arc2@hpgamecraft.xjnnt.mongodb.net/Gym?retryWrites=true&w=majority",{
+mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
