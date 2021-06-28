@@ -32,19 +32,15 @@ app.use(express.json());
 
 const util = require('util');
 const cors = require('cors');
-const session = require('express-session');
 
-app.use(session({
-    secret: 'shhhhh',
-    resave: true,
-    saveUninitialized: true}))
+//cookies
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 
 app.use(cors({
     credentials: true
 }))
-
-
-const cookieParser = require('cookie-parser');
 
 
 app.listen(port, () => console.log(`listening on port ${port}`));
@@ -55,24 +51,32 @@ app.get('/express_backend', (req, res) => {
 
 //get exercise
 app.get('/exercise', async (req, res) =>{
-    //set date and hours for consistency
-    const userDate = new Date(req.query.date);
-    userDate.setHours(0,0,0);
 
-    Exercise.find({date: userDate}, (err, Exercises) =>{
+    //verify access
+    if(!auths.verifyToken(req.cookies['token']))
+    {
+        res.status(401);
+    }
+    else{
+        //set date and hours for consistency
+        const userDate = new Date(req.query.date);
+        userDate.setHours(0,0,0);
 
-        //no entry for date create Exercise doc
-        if(!Exercises.length) {
-            emptyResponse = [new Exercise({
-                date: userDate,
-                exercises: [{"exercise": "", "sets": 0, "reps": 0, "weight": 0}]
-            })];
-            res.json(emptyResponse);
-        }
-        else{
-            res.json(Exercises);
-        }
-    });
+        Exercise.find({date: userDate}, (err, Exercises) =>{
+
+            //no entry for date create Exercise doc
+            if(!Exercises.length) {
+                emptyResponse = [new Exercise({
+                    date: userDate,
+                    exercises: [{"exercise": "", "sets": 0, "reps": 0, "weight": 0}]
+                })];
+                res.json(emptyResponse);
+            }
+            else{
+                res.json(Exercises);
+            }
+        });
+    }
 });
 
 app.post('/exercise/', async (req,res) => {
