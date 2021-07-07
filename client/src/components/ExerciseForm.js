@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 const ExerciseForm = ({addExercise}) =>{
 
-    const [userInput, setInput] = useState([{"exercise":"", "sets":0, "reps": 0, "weight":0 }]);
+    const [userInput, setInput] = useState([{"exercise":"", "sets":[0,0,0], "reps": 0, "weight":0 }]);
 
     const submitHandler = (e) =>{
         e.preventDefault();
@@ -30,6 +30,12 @@ const ExerciseForm = ({addExercise}) =>{
                 <label className="w3-left-align">Exercise</label>
                 <input className="w3-input" value={userInput[0].sets} name="sets" type="number" onChange={changeHandler} />
                 <label>Sets</label>
+                {userInput[0].sets.map((set, index) =>(
+                    <div>
+                        <input key={index} className="w3-input" value="0"></input>
+                        <label>set {index + 1}</label>
+                    </div>
+                ))}
                 <input className="w3-input" value={userInput[0].reps} name="reps" type="number" onChange={changeHandler} />
                 <label>Reps</label>
                 <input className="w3-input" value={userInput[0].weight} name="weight" onChange={changeHandler} type="number" />

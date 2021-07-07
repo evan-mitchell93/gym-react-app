@@ -64,7 +64,7 @@ const LoginForm = () => {
                 <button type="submit" className="w3-btn w3-teal w3-input">Login</button>
                 
             </form>
-            <a href="/Register">Register</a>
+                {/*<a href="/Register">Register</a> */}
             </div>
         );
     }
