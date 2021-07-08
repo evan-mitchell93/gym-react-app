@@ -5,7 +5,7 @@ const ExerciseList = ({exerciseList}) => {
     return (
         <div className="w3-container w3-panel">
             {exerciseList.map((exercise, index) => {
-                if(exercise.exercise == ""){
+                if(exercise.exercise === ""){
                     return;
                 }
                 return (
