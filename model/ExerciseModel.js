@@ -6,7 +6,7 @@ const ExerciseSchema = new mongoose.Schema({
         required: true
     },
     
-    exercises: [{exercise: String, sets: Number, reps: Number, weight: Number}]
+    exercises: [{exercise: String, sets: Number, setWeights: Array, reps: Array}]
 
 });
 

@@ -13,9 +13,10 @@ const ExerciseForm = ({addExercise}) =>{
     };
 
     const changeHandler = (e) =>{
-
-        console.log("name " + e.target.name + " index? " + e.target.getAttribute('passedkey'));
+        //value entered by user
         let val = e.target.value;
+
+        //copy of form input before updating
         let tmp = [...userInput];
         tmp[0][e.target.name] = val;
         if(e.target.name === "sets"){
@@ -25,8 +26,6 @@ const ExerciseForm = ({addExercise}) =>{
                 let difference = parseInt(val) - tmp[0]["setWeights"].length;
                 tmp[0]["setWeights"] = tmp[0]["setWeights"].concat(Array(difference).fill(0));
                 tmp[0]["reps"] = tmp[0]["reps"].concat(Array(difference).fill(0));
-
-                console.log(tmp[0]["setWeights"]);
             }
 
             //if number of sets decreases remove that many entries from the array

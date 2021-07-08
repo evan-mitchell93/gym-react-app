@@ -16,9 +16,10 @@ const Home = () => {
   const addExercise = (input) =>{
     let copy = [...renderCopy];
     //append the new exercise data to current list of exercises
-    copy = [...copy, {exercise:input[0].exercise, sets:input[0].sets, reps:input[0].reps, weight:input[0].weight}];
+    copy = [...copy, {exercise:input[0].exercise, sets:input[0].sets,setWeights:input[0].setWeights, reps:input[0].reps}];
     setRenderCopy(copy);
     setExerciseList(copy)
+    console.log(exerciseList[0]);
   }
 
   useEffect (()=>{
