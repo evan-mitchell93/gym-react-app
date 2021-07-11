@@ -53,7 +53,7 @@ const ExerciseForm = ({addExercise}) =>{
             <div className="w3-container w3-amber">
                 <h2>Add Exercise</h2>
             </div>
-            <form onSubmit={submitHandler} className="w3-container w3-left-align w3-padding-16 w3-border-red">
+            <form onSubmit={submitHandler} className="w3-container w3-left-align w3-padding-16">
                 <input className="w3-input" value={userInput[0].exercise} name="exercise" type="text" onChange={changeHandler} placeholder="Enter Exercise Name" />
                 <label className="w3-left-align">Exercise</label>
                 <input className="w3-input" value={userInput[0].sets} name="sets" type="number" onChange={changeHandler} />

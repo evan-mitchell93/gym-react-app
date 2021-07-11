@@ -18,11 +18,18 @@ const Home = () => {
     //append the new exercise data to current list of exercises
     copy = [...copy, {exercise:input[0].exercise, sets:input[0].sets,setWeights:input[0].setWeights, reps:input[0].reps}];
     setRenderCopy(copy);
-    setExerciseList(copy)
-    console.log(exerciseList[0]);
+    setExerciseList(copy);
+  }
+
+  //remove exercise from list
+  const removeExercise = (idx) =>{
+    let copy = renderCopy.splice(idx, 1);
+    setRenderCopy(renderCopy);
+    setExerciseList(renderCopy);
   }
 
   useEffect (()=>{
+    console.log(exerciseList);
     fetch(`/exercise?date=${startDate.toString()}`, {
       method: 'POST',
       headers: {
@@ -73,7 +80,7 @@ const Home = () => {
                 <input type="date" onChange={changeDate} placeholder="dd-mm-yyyy" className="w3-input"></input>
                 <button className="w3-btn w3-teal" onClick={getDate}>Get Exercises</button>
             </div>
-        <ExerciseList exerciseList={renderCopy} />
+        <ExerciseList exerciseList={renderCopy} removeExercise={removeExercise} />
         <ExerciseForm addExercise={addExercise} />
       </div>
     )
