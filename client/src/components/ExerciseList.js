@@ -5,7 +5,6 @@ const ExerciseList = ({exerciseList, removeExercise}) => {
     const delHandler = (e) =>{
         e.preventDefault();
         let idx = e.target.getAttribute('passedIdx');
-        //console.log(exerciseList);
         removeExercise(idx);
     }
     return (
@@ -17,7 +16,7 @@ const ExerciseList = ({exerciseList, removeExercise}) => {
                 return (
                     <div key={index} className="w3-panel w3-half">
                         <Exercise exercise={exercise} idx={index} />
-                        <button passedIdx={index} onClick={delHandler}>Delete</button>
+                        <button passedIdx={exercise._id} onClick={delHandler}>Delete</button>
                     </div>
                 )
                 }

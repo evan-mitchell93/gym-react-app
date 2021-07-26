@@ -19,7 +19,7 @@ router.get('/exercise', async (req, res) =>{
         if(!Exercises.length) {
             emptyResponse = [new Exercise({
                 date: userDate,
-                exercises: [{"exercise": "", "sets": 0, "setWeights": [0], "reps": [0]}]
+                exercises: [{"id": "0", "exercise": "", "sets": 0, "setWeights": [0], "reps": [0]}]
             })];
             res.json(emptyResponse);
         }

@@ -23,9 +23,11 @@ const Home = () => {
 
   //remove exercise from list
   const removeExercise = (idx) =>{
-    let copy = renderCopy.splice(idx, 1);
-    setRenderCopy(renderCopy);
-    setExerciseList(renderCopy);
+    let cp = renderCopy.filter(exc => {
+      return!(exc._id === idx)
+    });
+    setRenderCopy(cp);
+    setExerciseList(cp);
   }
 
   useEffect (()=>{
